@@ -1,19 +1,21 @@
 <template>
-  <div class="main-wrap">
-    <MainForm />
-    <button @click="show = true">Open Modal</button>
+  <div class="container">
+    <div class="main-wrap">
+      <MainForm />
+      <button @click="show = true">Open Modal</button>
 
-    <VueFinalModal
-      class="confirm-modal"
-      content-class="confirm-modal-content"
-      overlay-transition="vfm-fade"
-      content-transition="vfm-fade"
-      v-model="show"
-      title="Hello World!"
-      @confirm="() => confirm()"
-    >
-      <p>The content of the modal</p>
-    </VueFinalModal>
+      <VueFinalModal
+        class="confirm-modal"
+        content-class="confirm-modal-content"
+        overlay-transition="vfm-fade"
+        content-transition="vfm-fade"
+        v-model="show"
+        title="Hello World!"
+        @confirm="() => confirm()"
+      >
+        <p>The content of the modal</p>
+      </VueFinalModal>
+    </div>
   </div>
 </template>
 

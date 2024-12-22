@@ -1,6 +1,5 @@
 <template>
-  <div class="input-wrap">
-    <label v-if="label">{{ label }}</label>
+  <div class="form-field">
     <input
       :class="customClass || 'input-group base-input'"
       v-model="value"
@@ -12,6 +11,8 @@
       :disabled="disabled"
       :placeholder="placeholder"
     />
+    <label v-if="label">{{ label }}</label>
+
     <span v-if="errorMessage" class="input-group-error">
       {{ errorMessage }}
     </span>
@@ -26,7 +27,7 @@ const {
   type = "text",
   disabled = false,
   customClass = "",
-  placeholder = "",
+  placeholder = "placeholder",
   min = "",
   max = "",
   maxlength = "255",

@@ -2,6 +2,7 @@
 :root {
   --primary-color: #174b7c;
   --input-group-border-color: #f7f8f8;
+  --input-group-border-color-focus: #174b7c5a;
 }
 
 /* border */
@@ -17,4 +18,9 @@
 
   --btn-height: 38px;
   --btn-width: 160px;
+
+  --spacer: 20px;
+
+  --font-md: 18px;
+  --font-sm: 14px;
 }

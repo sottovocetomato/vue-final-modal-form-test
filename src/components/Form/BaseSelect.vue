@@ -1,5 +1,5 @@
 <template>
-  <div class="input-wrap">
+  <div class="form-field">
     <label :for="id" v-if="label">{{ label }}</label>
     <select
       :name="name"

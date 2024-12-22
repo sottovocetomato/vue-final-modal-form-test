@@ -7,13 +7,61 @@ body {
 
 .input-group {
   height: var(--input-group-height);
-  padding: 0 var(--input-group-padding);
   border: var(--input-group-border);
-  border-radius: 0 var(--input-group-border-radius);
+  border-radius: var(--input-group-border-radius);
+  padding: 0 var(--input-group-padding);
+  font-size: var(--font-md);
+  color: var(--primary-color);
+  line-height: 50px;
+  font-weight: 500;
+}
+.input-group:focus {
+  outline-color: var(--input-group-border-color-focus);
 }
 
 .btn {
   height: var(--btn-height);
   width: var(--btn-width);
   background-color: var(--primary-color);
+  outline: none;
+  border: none;
+}
+
+.container {
+  width: 1200px;
+  margin: auto;
+  padding: 15px;
+}
+
+.form-field {
+  position: relative;
+  color: var(--primary-color);
+}
+
+.form-field label {
+  /* allows label to be absolute */
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: calc(var(--spacer) + 2px);
+  font-size: var(--font-sm);
+  pointer-events: none;
+  transition: 0.3s;
+  font-weight: 300;
+}
+
+.form-field {
+  position: relative;
+}
+
+.form-field input:focus + label,
+.form-field input:not(:placeholder-shown) + label {
+  top: 17px;
+}
+
+.form-field input::placeholder {
+  color: transparent;
+}
+input[type="text"] {
+  padding-top: 20px;
 }

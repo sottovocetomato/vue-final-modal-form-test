@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="sendForm" class="">
     <div class="fields">
-      <BaseInput name="email" placeholder="Введите email"></BaseInput>
+      <BaseInput name="email" label="Введите email"></BaseInput>
       <BaseRange type="date" />
     </div>
     <BaseButton type="submit">Отправить форму</BaseButton>
