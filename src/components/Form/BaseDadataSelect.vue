@@ -91,7 +91,6 @@ async function sendToDadata() {
 
     organizations.value = data?.data?.suggestions;
     showList.value = true;
-    console.log(data?.data?.suggestions);
   } catch (e) {
     console.error(e);
   }

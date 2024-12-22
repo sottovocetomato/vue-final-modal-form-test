@@ -30,7 +30,14 @@ const setDefaultValidationRules = () => {
       if (context.rule?.name === "regex") {
         return `Поле ${context.field} не подходит под заданное правило`;
       }
-
+      if (context.rule?.name === "min_value") {
+        return `Поле должно быть больше ${
+          context.rule.params[0] ?? ""
+        } ${JSON.stringify(context.rule.params)}`;
+      }
+      if (context.rule?.name === "max_value") {
+        return `Поле должно быть меньше ${context.rule.params[0] ?? ""}`;
+      }
       return `${context.field} содержит некоректные данные`;
     },
   });

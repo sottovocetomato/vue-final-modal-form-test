@@ -1,32 +1,37 @@
 <template>
-  <form @submit.prevent="sendForm" class="">
-    <div class="fields">
-      <BaseDadataSelect
-        name="org"
-        label="Наименование организации / ИП"
-        @select="setAddress"
-      ></BaseDadataSelect>
-      <BaseInput
-        name="phone"
-        label="Контактный телефон"
-        mask="+7 (###) ###-##-##"
-      ></BaseInput>
-      <BaseSelect
-        name="roomType"
-        label="Тип помещения"
-        :options="selectOptions"
-        multiple
-      ></BaseSelect>
-      <BaseInput name="address" label="Адрес"></BaseInput>
-      <BaseRange
-        nameFrom="roomSquareFrom"
-        nameTo="roomSquareTo"
-        label="Площадь помещения (м2)"
-      ></BaseRange>
-      <BaseRange type="date" label="Дата начала аренды" />
-    </div>
-    <BaseButton type="submit">Отправить форму</BaseButton>
-  </form>
+  <div class="main-form-wrap">
+    <h2>Заполните заявку, чтобы стать резидентом</h2>
+
+    <form @submit.prevent="sendForm" class="main-form">
+      <div class="fields">
+        <BaseDadataSelect
+          name="org"
+          label="Наименование организации / ИП"
+          @select="setAddress"
+        ></BaseDadataSelect>
+        <BaseInput
+          name="phone"
+          label="Контактный телефон"
+          mask="+7 (###) ###-##-##"
+        ></BaseInput>
+        <BaseSelect
+          name="roomType"
+          label="Тип помещения"
+          multiple
+          :options="selectOptions"
+        ></BaseSelect>
+        <BaseInput name="address" label="Адрес"></BaseInput>
+        <BaseRange
+          nameFrom="roomSquareFrom"
+          nameTo="roomSquareTo"
+          ref="roomSquare"
+          label="Площадь помещения (м2)"
+        ></BaseRange>
+        <BaseRange type="date" label="Дата начала аренды" />
+      </div>
+      <BaseButton type="submit">Отправить форму</BaseButton>
+    </form>
+  </div>
 </template>
 
 <script setup>
@@ -39,6 +44,10 @@ import BaseInput from "@/components/Form/BaseInput.vue";
 import BaseDadataSelect from "@/components/Form/BaseDadataSelect.vue";
 import BaseSelect from "@/components/Form/BaseSelect.vue";
 import api from "../../api/index.js";
+
+const emit = defineEmits(["submit"]);
+
+const roomSquare = ref(null);
 
 const selectOptions = [
   { text: "Производственная площадь", value: 1 },
@@ -80,8 +89,9 @@ const sendForm = handleSubmit(async (values, actions) => {
     console.log(values, "values");
     // Отправляем на бэк
     // const res = await api.post("api/ticket/create", values);
-    actions.resetForm();
+    // actions.resetForm();
     alert("Форма отправлена успешно!");
+    emit("submit");
   } catch (e) {
     throw new Error(e);
   }

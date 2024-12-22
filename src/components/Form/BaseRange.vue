@@ -76,24 +76,27 @@ const {
   customClass: String,
   label: String,
 });
-console.log(type, "type");
 
 const onRangeEndUpdate = debounce((e) => {
   if (e < rangeStart.value) {
     rangeEnd.value = rangeStart.value;
-    rangeStartKey.value++;
+    nextTick(() => {
+      rangeEndKey.value++;
+    });
     return;
   }
   rangeEnd.value = e;
-}, 250);
+}, 500);
 const onRangeStartUpdate = debounce((e) => {
   if (e > rangeEnd.value && rangeEnd.value > 0) {
     rangeStart.value = rangeEnd.value;
-    rangeEndKey.value++;
+    nextTick(() => {
+      rangeStartKey.value++;
+    });
     return;
   }
   rangeStart.value = e;
-}, 250);
+}, 500);
 </script>
 
 <style scoped></style>

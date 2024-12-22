@@ -1,8 +1,9 @@
 <template>
   <div class="container">
     <div class="main-wrap">
-      <MainForm />
-      <button @click="show = true">Open Modal</button>
+      <BaseButton @click="toggleModal" class="modal-btn"
+        >Открыть модальное окно</BaseButton
+      >
 
       <VueFinalModal
         class="confirm-modal"
@@ -10,10 +11,10 @@
         overlay-transition="vfm-fade"
         content-transition="vfm-fade"
         v-model="show"
-        title="Hello World!"
-        @confirm="() => confirm()"
+        title="Form Modal"
+        @confirm="toggleModal"
       >
-        <p>The content of the modal</p>
+        <MainForm @submit="toggleModal" />
       </VueFinalModal>
     </div>
   </div>
@@ -26,8 +27,8 @@ import { ref } from "vue";
 import MainForm from "@/components/MainForm.vue";
 const show = ref(false);
 
-function confirm() {
-  show.value = false;
+function toggleModal() {
+  show.value = !show.value;
 }
 </script>
 
@@ -38,25 +39,9 @@ function confirm() {
   align-items: center;
 }
 .confirm-modal-content {
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
+  padding: calc(var(--spacer) * 2);
   background: #fff;
-  border-radius: 0.5rem;
-}
-.confirm-modal-content > * + * {
-  margin: 0.5rem 0;
-}
-.confirm-modal-content h1 {
-  font-size: 1.375rem;
-}
-.confirm-modal-content button {
-  margin: 0.25rem 0 0 auto;
-  padding: 0 8px;
-  border: 1px solid;
-  border-radius: 0.5rem;
-}
-.dark .confirm-modal-content {
-  background: #000;
+  width: 800px;
+  height: 778px;
 }
 </style>

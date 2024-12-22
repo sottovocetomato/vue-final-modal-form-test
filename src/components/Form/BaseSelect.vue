@@ -10,6 +10,8 @@
       id="base-select-input"
       :placeholder="placeholder"
       @click="toggleList"
+      autocomplete="off"
+      readonly
     />
     <label for="base-select-input" v-if="label">{{ label }}</label>
     <span v-if="errorMessage" class="input-group-error__message">
@@ -32,7 +34,7 @@
 
 <script setup>
 import { useField } from "vee-validate";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 const model = defineModel();
 const {
@@ -60,7 +62,9 @@ const showList = ref(false);
 
 const optionsText = ref([]);
 
-function toggleList() {
+function toggleList(e) {
+  if (!e) return;
+  e.target.classList.toggle("list-open");
   showList.value = !showList.value;
 }
 
@@ -74,7 +78,7 @@ function onOptionSelect(opt, e) {
         value.value.push(opt.value);
       }
     } else {
-      value.value = [opt.text];
+      value.value = [opt.value];
     }
     if (Array.isArray(optionsText.value)) {
       if (optionsText.value.includes(opt.text)) {
@@ -88,13 +92,18 @@ function onOptionSelect(opt, e) {
       optionsText.value = [opt.text];
     }
   } else {
-    value.value = opt;
+    value.value = opt.value;
     optionsText.value = opt.text;
-    toggleList();
+    showList.value = false;
   }
 }
 
 const { value, errorMessage } = useField(() => name);
+watch(value, (newVal) => {
+  if (!newVal) {
+    optionsText.value = [];
+  }
+});
 </script>
 
 <style scoped></style>
