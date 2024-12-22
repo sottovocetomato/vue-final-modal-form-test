@@ -14,13 +14,6 @@ AxiosInstance.interceptors.response.use(
     return resp;
   },
   (resp) => {
-    if (resp?.response?.status === 500) {
-      if (resp?.response?.data?.message?.includes("TokenExpiredError")) {
-        return Promise.reject(
-          resp?.response?.data?.message || "Неизвестная ошибка"
-        );
-      }
-    }
     return Promise.reject(
       resp?.response?.data?.message || "Неизвестная ошибка"
     );

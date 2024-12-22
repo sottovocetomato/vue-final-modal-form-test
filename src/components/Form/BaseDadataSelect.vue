@@ -1,14 +1,18 @@
 <template>
   <div class="form-field">
     <input
-      class="input-group base-input"
+      :class="[
+        'input-group base-input',
+        errorMessage ? 'input-group-error' : '',
+      ]"
       v-model.trim="value"
       type="text"
       id="autocomplete-input"
+      :placeholder="placeholder"
       @input="onInput"
     />
     <label for="autocomplete-input" v-if="label">{{ label }}</label>
-    <span v-if="errorMessage" class="input-group-error">
+    <span v-if="errorMessage" class="input-group-error__message">
       {{ errorMessage }}
     </span>
     <div class="autocomplete-list" v-if="showList">
@@ -16,7 +20,12 @@
         <li
           v-for="org in organizations"
           :key="org.id"
-          @click="onOrgSelect(org.unrestricted_value)"
+          @click="
+            onOrgSelect(
+              org.unrestricted_value,
+              org?.data?.address?.unrestricted_value
+            )
+          "
         >
           <p>{{ org.unrestricted_value }}</p>
         </li>
@@ -31,12 +40,14 @@ import debounce from "lodash.debounce";
 import api from "../../../api/index.js";
 import { ref } from "vue";
 
-const model = defineModel();
+const emit = defineEmits(["select"]);
+
 const {
   id = "select-input",
   name = "",
   options = [],
   customClass = "",
+  placeholder = "placeholder",
   label = "",
   multiple = false,
   disabled = false,
@@ -47,6 +58,8 @@ const {
   options: Array,
   customClass: String,
   label: String,
+  placeholder: String,
+
   multiple: Boolean,
   modelValue: [String, Number, Object, Array],
 });
@@ -55,9 +68,10 @@ const onInput = debounce(sendToDadata, 600);
 const organizations = ref([]);
 const showList = ref(false);
 
-function onOrgSelect(e) {
-  value.value = e;
+function onOrgSelect(val, address) {
+  value.value = val;
   showList.value = false;
+  emit("select", address);
 }
 
 async function sendToDadata() {
@@ -86,42 +100,4 @@ async function sendToDadata() {
 const { value, errorMessage } = useField(() => name);
 </script>
 
-<style scoped>
-.autocomplete-wrap label {
-  font-size: var(--font-md);
-  margin-bottom: 2rem;
-}
-.autocomplete-wrap input {
-  padding: 1.2rem;
-  border-radius: 1rem;
-  border: 1px solid #ccc;
-}
-.autocomplete-wrap input:focus {
-  outline: 1px solid #999898;
-}
-.autocomplete-list {
-  position: absolute;
-  width: 100%;
-  height: 250px;
-  padding: var(--spacer) 0;
-  top: 85%;
-  left: 50%;
-  transform: translateX(-50%);
-  border: var(--input-group-border);
-  overflow-y: scroll;
-  border-radius: 1rem;
-  z-index: 100;
-  background: white;
-}
-.autocomplete-list ul {
-}
-.autocomplete-list li {
-  font-size: var(--font-sm);
-  font-weight: 500;
-  padding: 10px 20px;
-}
-.autocomplete-list li:hover {
-  background-color: rgba(153, 152, 152, 0.15);
-  cursor: pointer;
-}
-</style>
+<style scoped></style>

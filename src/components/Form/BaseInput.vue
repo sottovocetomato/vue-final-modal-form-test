@@ -1,7 +1,10 @@
 <template>
   <div class="form-field">
     <input
-      :class="customClass || 'input-group base-input'"
+      :class="[
+        customClass || 'input-group base-input',
+        errorMessage ? 'input-group-error' : '',
+      ]"
       v-model="value"
       :maxlength="maxlength"
       :minlength="minlength"
@@ -15,7 +18,7 @@
     />
     <label v-if="label">{{ label }}</label>
 
-    <span v-if="errorMessage" class="input-group-error">
+    <span v-if="errorMessage" class="input-group-error__message">
       {{ errorMessage }}
     </span>
   </div>

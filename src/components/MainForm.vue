@@ -4,18 +4,19 @@
       <BaseDadataSelect
         name="org"
         label="Наименование организации / ИП"
+        @select="setAddress"
       ></BaseDadataSelect>
       <BaseInput
         name="phone"
         label="Контактный телефон"
         mask="+7 (###) ###-##-##"
       ></BaseInput>
-      <BaseSelectTwo
+      <BaseSelect
         name="roomType"
         label="Тип помещения"
         :options="selectOptions"
         multiple
-      ></BaseSelectTwo>
+      ></BaseSelect>
       <BaseInput name="address" label="Адрес"></BaseInput>
       <BaseRange
         nameFrom="roomSquareFrom"
@@ -34,47 +35,55 @@ import BaseButton from "@/components/Form/BaseButton.vue";
 import { useForm } from "vee-validate";
 import { computed, ref } from "vue";
 import BaseInput from "@/components/Form/BaseInput.vue";
-import BaseSelect from "@/components/Form/BaseSelect.vue";
+
 import BaseDadataSelect from "@/components/Form/BaseDadataSelect.vue";
-import BaseSelectTwo from "@/components/Form/BaseSelectTwo.vue";
+import BaseSelect from "@/components/Form/BaseSelect.vue";
+import api from "../../api/index.js";
 
 const selectOptions = [
   { text: "Производственная площадь", value: 1 },
   { text: "Торговое", value: 2 },
   { text: "Офисное", value: 3 },
   { text: "Спортивное", value: 4 },
-  { text: "Прекрасная комната 1х1 в стиле минимализм недорого", value: 5 },
+  { text: "Прекрасная площадь 1х1м2", value: 5 },
 ];
 
 const validationSchema = computed(() => ({
   org: "required",
-  email: "email",
-  phone: "required",
+  phone: "required|phone",
   roomSquareFrom: "required",
   roomSquareTo: "required",
   address: "required",
-  roomSquare: "required",
+  roomType: "required",
   dateStart: "required",
   dateEnd: "required",
 }));
 
-const { handleSubmit, isSubmitting } = useForm({
+const { handleSubmit, isSubmitting, setFieldValue } = useForm({
   initialValues: {
     org: "",
-    email: "",
     phone: "",
     roomType: "",
     address: "",
-    roomSquare: "",
-    date: "",
+    roomSquareFrom: "",
+    roomSquareTo: "",
+    dateStart: "",
+    dateEnd: "",
   },
   validationSchema,
 });
+function setAddress(address) {
+  setFieldValue("address", address);
+}
 const sendForm = handleSubmit(async (values, actions) => {
   try {
     console.log(values, "values");
+    // Отправляем на бэк
+    // const res = await api.post("api/ticket/create", values);
+    actions.resetForm();
+    alert("Форма отправлена успешно!");
   } catch (e) {
-    console.log(e, "errors");
+    throw new Error(e);
   }
 });
 </script>

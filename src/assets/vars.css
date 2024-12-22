@@ -4,6 +4,9 @@
   --primary-color-light: rgba(23, 75, 124, 0.28);
   --input-group-border-color: #f7f8f8;
   --input-group-border-color-focus: #174b7c5a;
+
+  --validation-error: #fa8888;
+  --validation-error-focus: #fa4040;
 }
 
 /* border */
