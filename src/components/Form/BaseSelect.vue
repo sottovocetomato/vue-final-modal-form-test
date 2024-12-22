@@ -1,11 +1,10 @@
 <template>
   <div class="form-field">
-    <label :for="id" v-if="label">{{ label }}</label>
     <select
       :name="name"
       :id="id"
       :multiple="multiple"
-      v-model="model"
+      v-model="value"
       class="input-group base-select"
     >
       <option
@@ -16,6 +15,7 @@
         {{ option.text }}
       </option>
     </select>
+    <label :for="id" v-if="label">{{ label }}</label>
     <span v-if="errorMessage" class="input-group-error">
       {{ errorMessage }}
     </span>
@@ -25,7 +25,6 @@
 <script setup>
 import { useField } from "vee-validate";
 
-const model = defineModel();
 const {
   id = "select-input",
   name = "",
@@ -42,6 +41,7 @@ const {
   customClass: String,
   label: String,
   multiple: Boolean,
+  modelValue: [String, Number, Object, Array],
 });
 const { value, errorMessage } = useField(() => name);
 </script>

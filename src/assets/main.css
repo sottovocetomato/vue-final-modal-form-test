@@ -107,9 +107,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .range-inputs__inputs input + label {
   top: 39% !important;
 }
-select {
-  line-height: 1;
+.base-select {
   background: url("./icons/chevron-down.svg") no-repeat right;
-  -webkit-appearance: none;
   background-position-x: calc(100% - var(--spacer));
+}
+
+.base-select-list__option.selected:after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--primary-color-light);
 }

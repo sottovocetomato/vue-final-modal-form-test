@@ -48,6 +48,7 @@ const {
   customClass: String,
   label: String,
   multiple: Boolean,
+  modelValue: [String, Number, Object, Array],
 });
 
 const onInput = debounce(sendToDadata, 600);
