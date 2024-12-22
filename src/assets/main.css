@@ -1,0 +1,19 @@
+@import "./reset.css";
+@import "./vars.css";
+
+body {
+  font-family: "Montserrat";
+}
+
+.input-group {
+  height: var(--input-group-height);
+  padding: 0 var(--input-group-padding);
+  border: var(--input-group-border);
+  border-radius: 0 var(--input-group-border-radius);
+}
+
+.btn {
+  height: var(--btn-height);
+  width: var(--btn-width);
+  background-color: var(--primary-color);
+}

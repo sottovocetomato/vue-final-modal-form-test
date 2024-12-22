@@ -1,0 +1,20 @@
+/* colors */
+:root {
+  --primary-color: #174b7c;
+  --input-group-border-color: #f7f8f8;
+}
+
+/* border */
+:root {
+  --input-group-border: 2px solid var(--input-group-border-color);
+  --input-group-border-radius: 6px;
+}
+
+/* sizing */
+:root {
+  --input-group-padding: 20px;
+  --input-group-height: 64px;
+
+  --btn-height: 38px;
+  --btn-width: 160px;
+}
