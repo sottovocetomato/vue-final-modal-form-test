@@ -1,41 +1,47 @@
 <template>
-  <template v-if="type === 'date'">
-    <BaseInput
-      placeholder="От"
-      :name="nameFrom || 'dateStart'"
-      type="date"
-      :max="dateEnd"
-      :key="rangeStartKey"
-      v-model="dateStart"
-    />
-    <BaseInput
-      :name="nameTo || 'dateEnd'"
-      placeholder="До"
-      type="date"
-      :min="dateStart"
-      :key="rangeEndKey"
-      v-model="dateEnd"
-    />
-  </template>
-  <template v-else>
-    <BaseInput
-      placeholder="От"
-      :name="nameFrom || 'rangeStart'"
-      type="number"
-      :key="rangeStartKey"
-      :modelValue="rangeStart"
-      @update:modelValue="onRangeStartUpdate"
-    />
-    <BaseInput
-      :name="nameTo || 'rangeEnd'"
-      placeholder="До"
-      type="number"
-      :min="rangeStart"
-      :key="rangeEndKey"
-      :modelValue="rangeEnd"
-      @update:modelValue="onRangeEndUpdate"
-    />
-  </template>
+  <div v-if="type === 'date'" class="range-inputs">
+    <span class="range-inputs__label" v-if="label">{{ label }}</span>
+    <div class="range-inputs__inputs">
+      <BaseInput
+        label="c"
+        :name="nameFrom || 'dateStart'"
+        type="date"
+        :max="dateEnd"
+        :key="rangeStartKey"
+        v-model="dateStart"
+      />
+      <BaseInput
+        :name="nameTo || 'dateEnd'"
+        label="по"
+        type="date"
+        :min="dateStart"
+        :key="rangeEndKey"
+        v-model="dateEnd"
+      />
+    </div>
+  </div>
+  <div class="range-inputs" v-else>
+    <span class="range-inputs__label" v-if="label">{{ label }}</span>
+    <div class="range-inputs__inputs">
+      <BaseInput
+        label="от"
+        :name="nameFrom || 'rangeStart'"
+        type="number"
+        :key="rangeStartKey"
+        :modelValue="rangeStart"
+        @update:modelValue="onRangeStartUpdate"
+      />
+      <BaseInput
+        :name="nameTo || 'rangeEnd'"
+        label="до"
+        type="number"
+        :min="rangeStart"
+        :key="rangeEndKey"
+        :modelValue="rangeEnd"
+        @update:modelValue="onRangeEndUpdate"
+      />
+    </div>
+  </div>
 </template>
 
 <script setup>

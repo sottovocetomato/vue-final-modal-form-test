@@ -10,7 +10,10 @@
   },
   "dependencies": {
     "@vee-validate/rules": "^4.14.7",
+    "axios": "^1.7.9",
     "lodash.debounce": "^4.0.8",
+    "maska": "^3.0.4",
+    "v-mask": "^2.3.0",
     "vee-validate": "^4.14.7",
     "vue": "^3.5.13",
     "vue-final-modal": "^4.5.5"

@@ -10,6 +10,8 @@
       :type="type"
       :disabled="disabled"
       :placeholder="placeholder"
+      v-maska
+      :data-maska="mask"
     />
     <label v-if="label">{{ label }}</label>
 
@@ -32,6 +34,7 @@ const {
   max = "",
   maxlength = "255",
   minlength = "",
+  mask = "",
   label = "",
 } = defineProps({
   type: String,
@@ -43,6 +46,7 @@ const {
   maxlength: String,
   minlength: String,
   customClass: String,
+  mask: String,
   label: String,
   modelValue: [String, Number, Object],
 });
