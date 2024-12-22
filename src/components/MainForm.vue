@@ -12,8 +12,12 @@
       ></BaseInput>
       <BaseSelect name="roomType" label="Тип помещения"></BaseSelect>
       <BaseInput name="address" label="Адрес"></BaseInput>
-      <BaseRange name="roomSquare" label="Площадь помещения (м2)"></BaseRange>
-      <BaseRange name="date" type="date" label="Дата начала аренды" />
+      <BaseRange
+        nameFrom="roomSquareFrom"
+        nameTo="roomSquareTo"
+        label="Площадь помещения (м2)"
+      ></BaseRange>
+      <BaseRange type="date" label="Дата начала аренды" />
     </div>
     <BaseButton type="submit">Отправить форму</BaseButton>
   </form>
@@ -29,12 +33,26 @@ import BaseSelect from "@/components/Form/BaseSelect.vue";
 import BaseDadataSelect from "@/components/Form/BaseDadataSelect.vue";
 
 const validationSchema = computed(() => ({
+  org: "required",
   email: "email",
+  phone: "required",
+  roomSquareFrom: "required",
+  roomSquareTo: "required",
+  address: "required",
+  roomSquare: "required",
+  dateStart: "required",
+  dateEnd: "required",
 }));
 
 const { handleSubmit, isSubmitting } = useForm({
   initialValues: {
+    org: "",
     email: "",
+    phone: "",
+    roomType: "",
+    address: "",
+    roomSquare: "",
+    date: "",
   },
   validationSchema,
 });

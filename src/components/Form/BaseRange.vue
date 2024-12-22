@@ -50,11 +50,11 @@ import BaseInput from "@/components/Form/BaseInput.vue";
 import { nextTick, ref } from "vue";
 import debounce from "lodash.debounce";
 
-const dateStart = ref(0);
-const dateEnd = ref(0);
+const dateStart = ref(null);
+const dateEnd = ref(null);
 
-const rangeStart = ref(0);
-const rangeEnd = ref(0);
+const rangeStart = ref(null);
+const rangeEnd = ref(null);
 const rangeStartKey = ref(0);
 const rangeEndKey = ref(0);
 
@@ -85,7 +85,7 @@ const onRangeEndUpdate = debounce((e) => {
     return;
   }
   rangeEnd.value = e;
-}, 350);
+}, 250);
 const onRangeStartUpdate = debounce((e) => {
   if (e > rangeEnd.value && rangeEnd.value > 0) {
     rangeStart.value = rangeEnd.value;
@@ -93,7 +93,7 @@ const onRangeStartUpdate = debounce((e) => {
     return;
   }
   rangeStart.value = e;
-}, 350);
+}, 250);
 </script>
 
 <style scoped></style>
